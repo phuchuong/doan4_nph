@@ -29,8 +29,11 @@
             ],
             "styles": [
               "src/styles.scss"
+
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/libs/apexcharts/apexcharts.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -103,5 +106,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "a5b99e12-3c2a-4318-aa5b-1410f23cdbb0"
   }
 }

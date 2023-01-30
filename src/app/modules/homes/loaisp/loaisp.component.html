@@ -1,0 +1,119 @@
+Loại sản phẩm
+
+
+<div class="content-page">
+  <div class="content ">
+    <div class="row">
+      <div class="col-12">
+        <div class="page-title-box">
+
+
+          <h4 class="page-title">Loại sản phẩm</h4>
+          <div class="col-sm-6">
+            <div id="example1_filter" class="dataTables_filter">
+              <label style="display: flex;">
+                <h4 style="padding-right: 10px;">Search: </h4><input type="text" name="TenLoai" type="search"
+                  placeholder="Nhập từ bạn cần tìm?" aria-describedby="button-addon8" class="form-control"
+                  [(ngModel)]="list_NPH.TenLoai" (ngModelChange)="Search()">
+              </label>
+
+            </div>
+          </div>
+          <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal"
+            style="margin-bottom:15px" (click)="creat()">CREAT </button>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div class="card-box">
+          <!-- Start Content-->
+          <div class="container-fluid">
+            <!-- <button><a href="">thêm</a></button> -->
+
+            <!-- <h3 class="table">THÊM</h3> -->
+            <table class="table table-bordered table-default ">
+
+              <thead>
+                <tr>
+                  <th scope="col">STT</th>
+                  <th scope="col">Mã loại sản phẩm</th>
+
+                  <th scope="col">Tên loai sp</th>
+
+                </tr>
+              </thead>
+
+              <tbody *ngFor="let list of list_item;let i=index">
+                <tr>
+                  <th scope="row">
+                    {{i}}
+                  </th>
+                  <td>{{list.MaLoai}}</td>
+                  <td>{{list.TenLoai}}</td>
+
+                  <td><button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                      style="" (click)="editproduct(list)"> EDIT</button></td>
+                  <td><button type="button" class="btn btn-info" style=""
+                      (click)="deleteproduct(list.MaLoai)">DELETE</button></td>
+
+                </tr>
+
+              </tbody>
+            </table>
+
+          </div> <!-- container -->
+
+        </div> <!-- end card-box-->
+      </div>
+    </div> <!-- content -->
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">{{formHeader}}</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Mã Sản Phẩm:</label>
+                <input type="text" class="form-control" [(ngModel)]="list_NPH.MaLoai" name="MaLoai" >
+              </div>
+              <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Tên Loại Sản Phẩm:</label>
+                <input type="text" class="form-control" [(ngModel)]="list_NPH.TenLoai" name="TenLoai">
+              </div>
+
+
+
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" (click)="save(formHeader)">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+
+      var myModal = document.getElementById('myModal')
+      var myInput = document.getElementById('myInput')
+
+      myModal.addEventListener('shown.bs.modal', function () {
+        myInput.focus()
+      })
+    </script>
+
+
+
+  </div>
+
+

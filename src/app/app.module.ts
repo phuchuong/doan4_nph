@@ -3,16 +3,57 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { IndexComponent } from './modules/homes/index/index.component';
+
+import { FooderComponent } from './shared/layout/fooder/fooder.component';
+import { HttpClientModule } from '@angular/common/http';
+import { TopbarComponent } from './shared/layout/topbar/topbar.component';
+import { SidebarComponent } from './shared/layout/sidebar/sidebar.component';
+import { RightbarComponent } from './shared/layout/rightbar/rightbar.component';
+
+
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { NgxPaginationModule } from 'ngx-pagination';
+
+import { KhachhangComponent } from './modules/homes/khachhang/khachhang.component';
+import { HoadonbanComponent } from './modules/homes/hoadonban/hoadonban.component';
+
+import { ChitiethdbComponent } from './modules/homes/chitiethdb/chitiethdb.component';
+import { LoaispComponent } from './modules/homes/loaisp/loaisp.component';
+import { ApiService } from './core/services/api.service';
+import { FormsModule } from '@angular/forms';
+import { AdminComponent } from './modules/homes/admin/admin.component';
+import { TrangthaiComponent } from './modules/homes/trangthai/trangthai.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    IndexComponent,
+
+    TopbarComponent,
+    FooderComponent,
+     TopbarComponent,
+     SidebarComponent,
+     RightbarComponent,
+
+     KhachhangComponent,
+     HoadonbanComponent,
+
+     ChitiethdbComponent,
+     LoaispComponent,
+     AdminComponent,
+     TrangthaiComponent,
+
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    Ng2SearchPipeModule,
+    NgxPaginationModule
   ],
-  providers: [],
+  providers: [ApiService,AppComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
