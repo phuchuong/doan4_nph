@@ -1,7 +1,3 @@
-
-
-
-
 import { ApiService } from './../../../core/services/api.service';
 import {
   AfterViewInit,
@@ -15,23 +11,19 @@ import { BaseComponent } from 'src/app/core/common/base-component';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 
-// data={}
-
 @Component({
-  selector: 'app-chitiethdb',
-  templateUrl: './chitiethdb.component.html',
-  styleUrls: ['./chitiethdb.component.scss']
+  selector: 'app-nhacungcap',
+  templateUrl: './nhacungcap.component.html',
+  styleUrls: ['./nhacungcap.component.scss']
 })
-export class ChitiethdbComponent
-  extends BaseComponent
-  implements OnInit, AfterViewInit
-{
+export class NhacungcapComponent   extends BaseComponent implements OnInit,AfterViewInit  {
+
   list_NPH= {
-    MaCTHDB: null,
-    MaDT: '',
-    ThanhTien: 0,
-    SoLuong:'',
-    MaHDB: '',
+    MaNCC: null,
+    TenNCC : '',
+    SDT : '',
+    Email: '',
+    DiaChi:'',
 
   };
 
@@ -49,7 +41,7 @@ export class ChitiethdbComponent
   }
 
   showModal() {
-    this.Api_NPH.get('/api/CTHDB').subscribe((res) => {
+    this.Api_NPH.get('/api/nhacungcap').subscribe((res) => {
       this.list_item = res;
 
       console.log(this.list_item);
@@ -75,81 +67,76 @@ export class ChitiethdbComponent
     this.loadScripts('assets/js/hide_menu.js', 'assets/js/slide_show.js');
   }
 
+  deleteproduct(id: any) {
+    this.Api_NPH.delete('api/nhacungcap/' + id).subscribe((res) => {
+      this.showModal();
+    });
+  }
 
   creat() {
-    this.formHeader = 'Thêm CTHDB';
+    this.formHeader = 'Thêm nhà cung cấp';
     this.list_NPH = {
-      MaCTHDB: null,
-      MaDT: '',
-      ThanhTien: 0,
-      SoLuong:'',
-      MaHDB: '',
+      MaNCC: null,
+      TenNCC : '',
+      SDT : '',
+      Email: '',
+      DiaChi:'',
     };
   }
   editproduct(a: any) {
-    this.formHeader = 'Sửa CTHDB';
-
-    this.list_NPH.MaCTHDB = a.MaCTHDB;
-    this.list_NPH.MaDT = a.MaDT;
-    this.list_NPH.ThanhTien = a.ThanhTien;
-    this.list_NPH.SoLuong = a.SoLuong;
-    this.list_NPH.MaHDB = a.MaHDB;
-
+    
+    this.formHeader = 'Sửa nhà cung cấp';
+    this.list_NPH.MaNCC = a.MaNCC;
+    this.list_NPH.TenNCC = a.TenNCC;
+    this.list_NPH.SDT = a.SDT;
+    this.list_NPH.Email = a.Email;
+    this.list_NPH.DiaChi = a.DiaChi;
 
   }
 
 
   save(nut: any) {
-    if (nut == 'Thêm CTHDB') {
-      this.Api_NPH.post('/api/CTHDB', this.list_NPH).subscribe((data: any) => {
+    if (nut == 'Thêm nhà cung cấp') {
+      this.Api_NPH.post('/api/nhacungcap', this.list_NPH).subscribe((data: any) => {
         this.list_NPH = {
-          MaCTHDB: null,
-          MaDT: '',
-          ThanhTien: 0,
-          SoLuong:'',
-          MaHDB: '',
+          MaNCC: null,
+          TenNCC : '',
+          SDT : '',
+          Email: '',
+          DiaChi:'',
         };
         this.showModal();
       });
     } else {
       //sửa sản phẩm
       console.log(this.list_NPH);
-      this.Api_NPH.put('/api/CTHDB', this.list_NPH);
+      this.Api_NPH.put('/api/nhacungcap', this.list_NPH);
 
       this.Api_NPH
-        .put(`/api/CTHDB/?macthdb=${this.list_NPH.MaHDB}`, this.list_NPH)
+        .put(`/api/nhacungcap/?manhacungcap=${this.list_NPH.MaNCC}`, this.list_NPH)
         .subscribe((data: any) => {
           this.list_NPH = {
-            MaCTHDB: null,
-            MaDT: '',
-            ThanhTien: 0,
-            SoLuong:'',
-            MaHDB: '',
+            MaNCC: null,
+            TenNCC : '',
+            SDT : '',
+            Email: '',
+            DiaChi:'',
           };
 
           this.showModal();
         });
     }
   }
-
-  deleteproduct(id: any) {
-    this.Api_NPH.delete('api/CTHDB/' + id).subscribe((res) => {
-      this.showModal();
-    });
-  }
   Search() {
-    if (this.list_NPH.MaHDB == '') {
+    if (this.list_NPH.TenNCC == '') {
       this.ngOnInit();
     } else {
       this.list_item = this.list_item.filter((res: any) => {
-        return res.MaHDB.toLocaleLowerCase().match(
-          this.list_NPH.MaHDB.toLocaleLowerCase()
+        return res.TenNCC.toLocaleLowerCase().match(
+          this.list_NPH.TenNCC.toLocaleLowerCase()
         );
       });
     }
   }
+
 }
-
-
-
-

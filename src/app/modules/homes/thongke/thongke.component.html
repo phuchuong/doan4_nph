@@ -1,0 +1,138 @@
+<div class="content-page">
+  <div class="container-fluid py-4">
+    <div class="row">
+      <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4" >
+        <div class="card">
+          <div class="card-header p-3 pt-2">
+            <div
+              class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
+              <!-- <i class="material-icons opacity-10">weekend</i> -->
+            </div>
+            <div class="text-end pt-1">
+              <p class="text-sm mb-0 text-capitalize">Tổng doanh thu bán hàng</p>
+              <h4 class="mb-0">{{tongtien |number}}.VND</h4>
+            </div>
+          </div>
+          <hr class="dark horizontal my-0">
+          <div class="card-footer p-3">
+            <!-- <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+55% </span>than last week</p> -->
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+        <div class="card">
+          <div class="card-header p-3 pt-2">
+            <div
+              class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
+              <!-- <i class="material-icons opacity-10">weekend</i> -->
+            </div>
+            <div class="text-end pt-1">
+              <p class="text-sm mb-0 text-capitalize">Tồn kho số lượng sản phẩm</p>
+              <h4 class="mb-0">{{tonkho |number}} sản phẩm</h4>
+            </div>
+          </div>
+          <hr class="dark horizontal my-0">
+          <div class="card-footer p-3">
+            <!-- <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+55% </span>than last week</p> -->
+          </div>
+        </div>
+      </div>
+      <!-- TWrite -->
+      <div class="col-xl-6 col-sm-6 mb-xl-0 mb-4">
+        <div class="card">
+          <div class="banchay">
+            <p>Top 3 sản phẩm bán chạy nhất</p>
+            <table class="table table-striped" >
+              <tr>
+                <th>STT</th>
+                <th>Ảnh</th>
+                <th>Tên</th>
+                <th>Giá</th>
+                <th>Số lượng đã bán</th>
+              </tr>
+              <ng-container *ngFor="let item of listSort.slice(0,3) ;let i =index">
+                <tr class="banchay_p ">
+                  <th scope="row">
+                    {{i+1}}
+                  </th>
+                  <td>{{item.info.AnhDT}}</td>
+                  <td>{{item.info.TenDT}}</td>
+                  <td>{{item.info.Gia}}</td>
+                  <td>{{item.soluong}}</td>
+                </tr>
+              </ng-container>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <br>
+      <div class="col-xl-12 col-sm-6 mb-xl-0 mb-4">
+        <div class="card">
+          <div class="container" >
+            <!-- <div>
+          <p>Thống kê trong ngày</p>
+          <p>Số hoá đơn bán trong ngày : </p>
+          <p>Doanh thu trong ngày : {{DoanhThuNgay}}</p>
+        </div> -->
+            <br>
+            <p>nhập tháng bắt đầu: </p>
+            <select [(ngModel)]="ChonThang" (change)="ThongkeTheoThang(2112)">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
+              <option value="11">12</option>
+            </select>
+            <p>nhập tháng két thúc: </p>
+            <select [(ngModel)]="ChonThangDich" (change)="ThongkeTheoThang(2112)">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
+              <option value="11">12</option>
+            </select>
+            <br>
+            <p>nhập năm bắt đầu: </p>
+            <select [(ngModel)]="ChonNam" (change)="ThongkeTheoThang(2112)">
+              <option value="2022">2022</option>
+              <option value="2023">2023</option>
+            </select>
+            <p>nhập năm kết thúc:</p>
+            <select [(ngModel)]="ChonNamDich" (change)="ThongkeTheoThang(2112)">
+              <option value="2022">2022</option>
+              <option value="2023">2023</option>
+            </select>
+
+            <button (click)="ChonlaiFilter()">Lọc lại</button>
+
+            <br>
+          </div>
+
+          <div class="statistics" style="margin-left: 35px;">
+            <p>Thống kê : </p>
+            <p>Số hoá đơn bán  : {{Soluonghoadontheothang}}</p>
+            <p>Doanh thu  :{{DoanhThuThang}} </p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

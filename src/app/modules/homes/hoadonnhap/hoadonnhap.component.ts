@@ -11,23 +11,24 @@ import { BaseComponent } from 'src/app/core/common/base-component';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 
-// data={}
-
 @Component({
-  selector: 'app-loaisp',
-  templateUrl: './loaisp.component.html',
-  styleUrls: ['./loaisp.component.scss'],
+  selector: 'app-hoadonnhap',
+  templateUrl: './hoadonnhap.component.html',
+  styleUrls: ['./hoadonnhap.component.scss']
 })
-export class LoaispComponent
-  extends BaseComponent
-  implements OnInit, AfterViewInit
-{
+export class HoadonnhapComponent extends BaseComponent implements OnInit,AfterViewInit {
+
   list_NPH= {
-    IDLoaiDT: null,
-    TenLoaiDT: '',
+    MaHDN: null,
+    MaNCC : '',
+    NgayNhap : '',
+    TongTien: '',
+    IDNV:'',
+
   };
 
   public list_item: any;
+  public list_item1:any;
 
   constructor(injector: Injector, private Api_NPH: ApiService) {
     super(injector);
@@ -41,7 +42,7 @@ export class LoaispComponent
   }
 
   showModal() {
-    this.Api_NPH.get('/api/LoaiDT').subscribe((res) => {
+    this.Api_NPH.get('/api/HoaDonNhap').subscribe((res) => {
       this.list_item = res;
 
       console.log(this.list_item);
@@ -51,12 +52,6 @@ export class LoaispComponent
           'assets/js/hide_menu.js',
           'assets/js/slide_show.js',
           'assets/js/vendor.min.js',
-          // 'assets/libs/peity/jquery.peity.min.js',
-          // 'assets/libs/apexcharts/apexcharts.min.js',
-          // 'assets/libs/jquery-vectormap/jquery-jvectormap-1.2.2.min.js',
-          // 'assets/libs/jquery-vectormap/jquery-jvectormap-us-merc-en.js',
-          // 'assets/js/pages/dashboard-1.init.js',
-          // 'assets/js/app.min.js',
           'https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js '
         );
       });
@@ -68,46 +63,58 @@ export class LoaispComponent
   }
 
   deleteproduct(id: any) {
-    this.Api_NPH.delete('api/LoaiDT/' + id).subscribe((res) => {
+    this.Api_NPH.delete('api/HoaDonNhap/' + id).subscribe((res) => {
       this.showModal();
     });
   }
 
   creat() {
-    this.formHeader = 'Thêm loại điện thoại';
+    this.formHeader = 'Thêm hóa đơn nhập';
     this.list_NPH = {
-      IDLoaiDT: null,
-      TenLoaiDT: '',
+      MaHDN: null,
+      MaNCC : '',
+      NgayNhap : '',
+      TongTien: '',
+      IDNV:'',
     };
   }
   editproduct(a: any) {
-    this.formHeader = 'Sửa loại điện thoại';
+    this.formHeader = 'Sửa hóa đơn nhập';
 
-    this.list_NPH.IDLoaiDT = a.IDLoaiDT;
-    this.list_NPH.TenLoaiDT = a.TenLoaiDT;
+    this.list_NPH.MaHDN = a.MaHDN;
+    this.list_NPH.MaNCC = a.MaNCC;
+    this.list_NPH.NgayNhap = a.NgayNhap;
+    this.list_NPH.TongTien = a.TongTien;
+
   }
 
 
   save(nut: any) {
-    if (nut == 'Thêm loại điện thoại') {
-      this.Api_NPH.post('/api/LoaiDT', this.list_NPH).subscribe((data: any) => {
+    if (nut == 'Thêm hóa đơn nhập') {
+      this.Api_NPH.post('/api/HoaDonNhap', this.list_NPH).subscribe((data: any) => {
         this.list_NPH = {
-          IDLoaiDT: null,
-          TenLoaiDT: '',
+          MaHDN: null,
+          MaNCC : '',
+          NgayNhap : '',
+          TongTien: '',
+          IDNV:'',
         };
         this.showModal();
       });
     } else {
       //sửa sản phẩm
       console.log(this.list_NPH);
-      this.Api_NPH.put('/api/LoaiDT', this.list_NPH);
+      this.Api_NPH.put('/api/HoaDonNhap', this.list_NPH);
 
       this.Api_NPH
-        .put(`/api/LoaiDT/?maloaidt=${this.list_NPH.IDLoaiDT}`, this.list_NPH)
+        .put(`/api/HoaDonNhap/?mahdn=${this.list_NPH.MaHDN}`, this.list_NPH)
         .subscribe((data: any) => {
           this.list_NPH = {
-            IDLoaiDT: null,
-            TenLoaiDT: '',
+            MaHDN: null,
+            MaNCC : '',
+            NgayNhap : '',
+            TongTien: '',
+            IDNV:'',
           };
 
           this.showModal();
@@ -115,16 +122,22 @@ export class LoaispComponent
     }
   }
   Search() {
-    if (this.list_NPH.TenLoaiDT == '') {
+    if (this.list_NPH.MaNCC == '') {
       this.ngOnInit();
     } else {
       this.list_item = this.list_item.filter((res: any) => {
-        return res.TenLoai.toLocaleLowerCase().match(
-          this.list_NPH.TenLoaiDT.toLocaleLowerCase()
+        return res.MaHDN.toLocaleLowerCase().match(
+          this.list_NPH.MaNCC.toLocaleLowerCase()
         );
       });
     }
   }
+
+  view(MaHDN: any) {
+    this.Api_NPH.get('/api/CTHDN/mahdn?mahdn=' + MaHDN).subscribe((res) => {
+      this.list_item1 = res;
+      console.log('ss',this.list_item1);
+    });
+  };
+
 }
-
-

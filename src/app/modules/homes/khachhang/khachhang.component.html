@@ -10,7 +10,7 @@ Khách hàng
           <h4 class="page-title">Khách Hàng</h4>
 
           <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal"
-            style="margin-bottom:15px" (click)="creat()">CREAT </button>
+            style="margin-bottom:15px" (click)="creat()">THÊM </button>
 
         </div>
       </div>
@@ -56,9 +56,9 @@ Khách hàng
                   <td>{{list.Matkhau}}</td>
 
                   <td><button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                      style="" (click)="editproduct(list)"> EDIT</button></td>
-                  <td><button type="button" class="btn btn-info" style=""
-                      (click)="deleteproduct(list.MaKH)">DELETE</button></td>
+                      style="" (click)="editproduct(list)"> SỬA</button></td>
+                  <td><button type="button" class="btn btn-danger" style=""
+                      (click)="deleteproduct(list.MaKH)">XÓA</button></td>
 
                 </tr>
 

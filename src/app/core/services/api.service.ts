@@ -29,6 +29,7 @@ export class ApiService {
   }
 
   public get(url: string): Observable<any> {
+    
     let cloneHeader: any = {};
     cloneHeader['Content-Type'] = 'application/json';
     const headerOptions = new HttpHeaders(cloneHeader);

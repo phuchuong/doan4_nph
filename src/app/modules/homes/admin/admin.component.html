@@ -21,7 +21,7 @@ ADMIN
           </div>
 
           <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal"
-            style="margin-bottom:15px" (click)="creat()">CREAT </button>
+            style="margin-bottom:15px" (click)="creat()">THÊM </button>
 
         </div>
       </div>
@@ -58,9 +58,9 @@ ADMIN
                   <td>{{list.MatKhau}}</td>
 
                   <td><button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                      style="" (click)="editproduct(list)"> EDIT</button></td>
-                  <td><button type="button" class="btn btn-info" style=""
-                      (click)="deleteproduct(list.MaAdmin)">DELETE</button></td>
+                      style="" (click)="editproduct(list)"> SỬA</button></td>
+                  <td><button type="button" class="btn btn-danger" style=""
+                      (click)="deleteproduct(list.MaAdmin)">XÓA</button></td>
 
                 </tr>
 

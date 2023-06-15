@@ -15,11 +15,7 @@
 
           <div class="col-sm-6">
             <div id="example1_filter" class="dataTables_filter">
-              <label style="display: flex;">
-                <h4 style="padding-right: 10px;">Search: </h4><input type="text" name="TenDT" type="search"
-                  placeholder="Nhập từ bạn cần tìm?" aria-describedby="button-addon8" class="form-control"
-                  [(ngModel)]="val.TenDT" (ngModelChange)="Search()">
-              </label>
+
 
             </div>
           </div>
@@ -43,15 +39,12 @@
               <thead>
                 <tr>
                   <th scope="col">STT</th>
-                  <th scope="col">Mã điện thoại</th>
-                  <th scope="col">Tên điện thoại</th>
-                  <th scope="col">Mã Loại</th>
+                  <th scope="col">Mã tin tức</th>
+                  <th scope="col">Tiêu đề</th>
+                  <th scope="col">Nội dung</th>
                   <th scope="col">Hình ảnh</th>
-                  <th scope="col">Mô Tả Chi Tiết</th>
-                  <th scope="col">Khuyến Mại</th>
-                  <th scope="col">Màu sắc</th>
-                  <th scope="col">Số Lượng</th>
-                  <th scope="col">Giá</th>
+                  <th scope="col">Ngay Dang</th>
+
                 </tr>
               </thead>
 
@@ -64,19 +57,16 @@
                     {{i}}
                   </th> -->
                   <td class="page-item">{{((page-1)*5)+i+1}}</td>
-                  <td>{{list.MaDT}}</td>
-                  <td>{{list.TenDT}}</td>
-                  <td>{{list.IDLoaiDT}}</td>
-                  <td><img src="{{PhotoPath}}/{{list.AnhDT}}" alt="" style="height:100px; "> </td>
-                  <td>{{list.MoTa}}</td>
-                  <td>{{list.Sale}}%</td>
-                  <td>{{list.TenMS}}</td>
-                  <td>{{list.SoLuong}}</td>
-                  <td>{{list.Gia | number: '1.0-0' }}Đ</td>
+                  <td>{{list.MaTinTuc}}</td>
+                  <td>{{list.TieuDe}}</td>
+                  <td>{{list.NoiDung}}</td>
+                  <td><img src="{{PhotoPath}}/{{list.AnhTinTuc}}" alt="" style="height:100px; "> </td>
+                  <td>{{list.NgayDang}}</td>
+
                   <td><button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal"
                       style="margin-top:35px" (click)="editproduct(list)"> SỬA</button></td>
                   <td><button type="button" class="btn btn-danger" style="margin-top:35px"
-                      (click)="deleteproduct(list.MaDT)">XÓA</button></td>
+                      (click)="deleteproduct(list.MaTinTuc)">XÓA</button></td>
                 </tr>
 
               </tbody>
@@ -107,39 +97,28 @@
                 <input type="text" class="form-control" [(ngModel)]="val.MaSP" name="MaSP" >
               </div> -->
               <div class="form-group">
-                <label for="recipient-name" class="col-form-label">Tên Sản Phẩm:</label>
-                <input type="text" class="form-control" [(ngModel)]="val.TenDT" name="TenDT">
+                <label for="recipient-name" class="col-form-label">Mã tin tức:</label>
+                <input type="text" class="form-control" [(ngModel)]="val.MaTinTuc" name="MaTinTuc">
               </div>
               <div class="form-group">
-                <label for="message-text" class="col-form-label">Mã loại:</label>
-                <input type="text" class="form-control" [(ngModel)]="val.IDLoaiDT" name="IDLoaiDT">
+                <label for="message-text" class="col-form-label">Tiêu đề:</label>
+                <input type="text" class="form-control" [(ngModel)]="val.TieuDe" name="TieuDe">
+              </div>
+              <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Nội dung:</label>
+                <input type="text" class="form-control" [(ngModel)]="val.NoiDung" name="NoiDung">
+              </div>
+              <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Anh:</label>
+                <input type="file" (change)="onFileSelected($event)" class="form-control" [(ngModel)]="val.AnhTinTuc"
+                  name="AnhTinTuc">
               </div>
 
               <div class="form-group">
-                <label for="recipient-name" class="col-form-label">Hình ảnh:</label>
-                <input type="file" (change)="onFileSelected($event)" class="form-control" [(ngModel)]="val.AnhDT"
-                  name="AnhDT">
+                <label for="recipient-name" class="col-form-label">Ngày đăng:</label>
+                <input type="text" class="form-control" [(ngModel)]="val.NgayDang" name="NgayDang">
               </div>
-              <div class="form-group">
-                <label for="recipient-name" class="col-form-label">Mô Tả:</label>
-                <input type="text" class="form-control" [(ngModel)]="val.MoTa" name="MoTa">
-              </div>
-              <div class="form-group">
-                <label for="recipient-name" class="col-form-label">Sale:</label>
-                <input type="text" class="form-control" [(ngModel)]="val.Sale" name="Sale">
-              </div>
-              <div class="form-group">
-                <label for="recipient-name" class="col-form-label">Tên mà sắc:</label>
-                <input type="text" class="form-control" [(ngModel)]="val.TenMS" name="TenMS">
-              </div>
-              <div class="form-group">
-                <label for="recipient-name" class="col-form-label">Số Lượng:</label>
-                <input type="text" class="form-control" [(ngModel)]="val.SoLuong" name="SoLuong">
-              </div>
-              <div class="form-group">
-                <label for="recipient-name" class="col-form-label">Giá:</label>
-                <input type="text" class="form-control" [(ngModel)]="val.Gia" name="Gia">
-              </div>
+
             </form>
           </div>
           <div class="modal-footer">

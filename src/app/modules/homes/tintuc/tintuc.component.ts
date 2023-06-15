@@ -11,30 +11,24 @@ import { BaseComponent } from 'src/app/core/common/base-component';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 
-// data={}
-
 @Component({
-  selector: 'app-index',
-  templateUrl: './index.component.html',
+  selector: 'app-tintuc',
+  templateUrl: './tintuc.component.html',
+  styleUrls: ['./tintuc.component.scss']
 })
-export class IndexComponent
-  extends BaseComponent
-  implements OnInit, AfterViewInit
-{
-  [x: string]: any;
+export class TintucComponent   extends BaseComponent
+implements OnInit, AfterViewInit{
+
+  public list_item: any;
 
   val = {
-    MaDT: null,
-    TenDT: '',
-    IDLoaiDT: '',
-    AnhDT: 'no.npg',
-    MoTa: '',
-    Sale: 0,
-    TenMS: '',
-    SoLuong: 0,
-    Gia: 0,
+    MaTinTuc: null,
+    TieuDe: '',
+    NoiDung: '',
+    AnhTinTuc: 'no.npg',
+    NgayDang: '',
+
   };
-  public list_item: any;
 
   PhotoName = '';
   PhotoPath = environment.PHOTO_API;
@@ -58,17 +52,6 @@ export class IndexComponent
     this.showModal();
   }
 
-  Search() {
-    if (this.val.TenDT == '') {
-      this.ngOnInit();
-    } else {
-      this.list_item = this.list_item.filter((res: any) => {
-        return res.TenDT.toLocaleLowerCase().match(
-          this.val.TenDT.toLocaleLowerCase()
-        );
-      });
-    }
-  }
 
   onFileSelected(event: any) {
     this.file = event.target.files[0];
@@ -87,7 +70,7 @@ export class IndexComponent
   }
 
   showModal() {
-    this._api.get('/api/DienThoai').subscribe((res) => {
+    this._api.get('/api/TinTuc').subscribe((res) => {
       this.list_item = res;
       this.totalLength = this.list_item.length;
       console.log(this.list_item);
@@ -116,7 +99,7 @@ export class IndexComponent
   deleteproduct(id: any) {
     let x = confirm('Bạn muốn xóa điện thoại?');
     if (x == true) {
-      this._api.delete('api/DienThoai/' + id).subscribe((res) => {
+      this._api.delete('api/TinTuc/' + id).subscribe((res) => {
         this.showModal();
       });
       alert(`xoa thành công!`);
@@ -133,75 +116,63 @@ export class IndexComponent
   //   }
   // }
   editproduct(a: any) {
-    this.formHeader = 'Sửa sản phẩm';
-    this.val.MaDT = a.MaDT;
-    this.val.TenDT = a.TenDT;
-    this.val.IDLoaiDT = a.IDLoaiDT;
-    this.val.AnhDT = a.AnhDT;
-    this.val.MoTa = a.MoTa;
-    this.val.Sale = a.Sale;
-    this.val.TenMS = a.TenMS;
-    this.val.SoLuong = a.SoLuong;
-    this.val.Gia = a.Gia;
+    this.formHeader = 'Sửa tin tức';
+    this.val.MaTinTuc = a.MaTinTuc;
+    this.val.TieuDe = a.TieuDe;
+
+    this.val.AnhTinTuc = a.AnhTinTuc;
+    this.val.NoiDung = a.NoiDung;
+
+    this.val.NgayDang = a.NgayDang;
+
   }
   creat() {
-    this.formHeader = 'Thêm sản phẩm';
+    this.formHeader = 'Thêm tin tức';
     this.val = {
-      MaDT: null,
-      TenDT: '',
-      IDLoaiDT: '',
-      AnhDT: 'no.npg',
-      MoTa: '',
-      Sale: 0,
-      TenMS: '',
-      SoLuong: 0,
-      Gia: 0,
+      MaTinTuc: null,
+      TieuDe: '',
+      NoiDung: '',
+      AnhTinTuc: 'no.npg',
+      NgayDang: '',
     };
   }
 
   save(nut: any) {
-    this.val.AnhDT = this.photofilename;
+    this.val.AnhTinTuc = this.photofilename;
 
-    if (nut == 'Thêm sản phẩm') {
+    if (nut == 'Thêm tin tức') {
       this.http
-        .post('http://localhost:5093/api/DienThoai', this.val)
+        .post('http://localhost:5093/api/TinTuc', this.val)
         .subscribe((data: any) => {
           if (this.file != null) {
             this.onUpload();
           }
+
           this.val = {
-            MaDT: null,
-            TenDT: '',
-            IDLoaiDT: '',
-            AnhDT: 'no.npg',
-            MoTa: '',
-            Sale: 0,
-            TenMS: '',
-            SoLuong: 0,
-            Gia: 0,
+            MaTinTuc: null,
+            TieuDe: '',
+            NoiDung: '',
+            AnhTinTuc: 'no.npg',
+            NgayDang: '',
           };
           this.showModal();
         });
     } else {
       //sửa sản phẩm
       console.log(this.val);
-      this._api.put('/api/DienThoai', this.val);
+      this._api.put('/api/TinTuc', this.val);
       this._api
-        .put(`/api/DienThoai/?madt=${this.val.MaDT}`, this.val)
+        .put(`/api/TinTuc/?matintuc=${this.val.MaTinTuc}`, this.val)
         .subscribe((data: any) => {
           if (this.file != null) {
             this.onUpload();
           }
           this.val = {
-            MaDT: null,
-            TenDT: '',
-            IDLoaiDT: '',
-            AnhDT: 'no.npg',
-            MoTa: '',
-            Sale: 0,
-            TenMS: '',
-            SoLuong: 0,
-            Gia: 0,
+            MaTinTuc: null,
+            TieuDe: '',
+            NoiDung: '',
+            AnhTinTuc: 'no.npg',
+            NgayDang: '',
           };
 
           let x = confirm('Bạn muốn chỉnh sửa sản phẩm?');

@@ -1,0 +1,59 @@
+.banchay {
+  margin: 5px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+}
+
+caption {
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+th, td {
+  padding: 10px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+th {
+  background-color: #434b56;
+
+}
+
+.banchay_p {
+  background-color: #434b56;
+  color: #f9f9f9;
+}
+
+
+.card{
+  height: 250px;
+}
+
+
+
+//
+
+.container {
+  margin: 20px;
+  display: flex;
+}
+
+p {
+  margin: 10px;
+}
+
+select, button {
+  padding: 5px;
+  font-size: 14px;
+  margin-right: 10px;
+}
+
+.statistics {
+  margin-top: 15px;
+}

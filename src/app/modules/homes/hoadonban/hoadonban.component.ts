@@ -1,6 +1,3 @@
-
-
-
 import { ApiService } from './../../../core/services/api.service';
 import {
   AfterViewInit,
@@ -14,30 +11,35 @@ import { BaseComponent } from 'src/app/core/common/base-component';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 
+import { ViewChild } from '@angular/core';
+// import { chitiethoadonban }
 // data={}
 
 @Component({
   selector: 'app-hoadonban',
   templateUrl: './hoadonban.component.html',
-  styleUrls: ['./hoadonban.component.scss']
+  styleUrls: ['./hoadonban.component.scss'],
 })
 export class HoadonbanComponent
   extends BaseComponent
   implements OnInit, AfterViewInit
 {
-  list_NPH= {
+  list_NPH = {
     MaHDB: null,
     NgayDat: '',
     ThanhTien: 0,
-    DiaChi:'',
+    DiaChi: '',
     SDT: '',
     HoTen: '',
     GhiChu: '',
     PhiVanChuyen: 0,
-    MaKH: ''
+    TrangThai: '',
+    MaKH: '',
+    IDNV: '',
   };
 
   public list_item: any;
+  public list_item1: any;
 
   constructor(injector: Injector, private Api_NPH: ApiService) {
     super(injector);
@@ -54,7 +56,7 @@ export class HoadonbanComponent
     this.Api_NPH.get('/api/HoaDonBan').subscribe((res) => {
       this.list_item = res;
 
-      console.log(this.list_item);
+      // console.log(this.list_item);
 
       setTimeout(() => {
         this.loadScripts(
@@ -77,19 +79,20 @@ export class HoadonbanComponent
     this.loadScripts('assets/js/hide_menu.js', 'assets/js/slide_show.js');
   }
 
-
   creat() {
     this.formHeader = 'Thêm HoaDonBan';
     this.list_NPH = {
       MaHDB: null,
       NgayDat: '',
       ThanhTien: 0,
-      DiaChi:'',
+      DiaChi: '',
       SDT: '',
       HoTen: '',
       GhiChu: '',
       PhiVanChuyen: 0,
-      MaKH: ''
+      TrangThai: '',
+      MaKH: '',
+      IDNV: '',
     };
   }
   editproduct(a: any) {
@@ -103,57 +106,72 @@ export class HoadonbanComponent
     this.list_NPH.HoTen = a.HoTen;
     this.list_NPH.GhiChu = a.GhiChu;
     this.list_NPH.PhiVanChuyen = a.PhiVanChuyen;
+    this.list_NPH.TrangThai = a.TrangThai;
     this.list_NPH.MaKH = a.MaKH;
-
+    this.list_NPH.IDNV = a.IDNV;
   }
-
-
   save(nut: any) {
     if (nut == 'Thêm HoaDonBan') {
-      this.Api_NPH.post('/api/HoaDonBan', this.list_NPH).subscribe((data: any) => {
-        this.list_NPH = {
-          MaHDB: null,
-          NgayDat: '',
-          ThanhTien: 0,
-          DiaChi:'',
-          SDT: '',
-          HoTen: '',
-          GhiChu: '',
-          PhiVanChuyen: 0,
-          MaKH: ''
-        };
-        this.showModal();
-      });
+      this.Api_NPH.post('/api/HoaDonBan', this.list_NPH).subscribe(
+        (data: any) => {
+          this.list_NPH = {
+            MaHDB: null,
+            NgayDat: '',
+            ThanhTien: 0,
+            DiaChi: '',
+            SDT: '',
+            HoTen: '',
+            GhiChu: '',
+            PhiVanChuyen: 0,
+            TrangThai: '',
+            MaKH: '',
+            IDNV: '',
+          };
+          this.showModal();
+        }
+      );
     } else {
       //sửa sản phẩm
       console.log(this.list_NPH);
       this.Api_NPH.put('/api/HoaDonBan', this.list_NPH);
 
-      this.Api_NPH
-        .put(`/api/HoaDonBan/?maHoaDonBan=${this.list_NPH.MaHDB}`, this.list_NPH)
-        .subscribe((data: any) => {
-          this.list_NPH = {
-            MaHDB: null,
-            NgayDat: '',
-            ThanhTien: 0,
-            DiaChi:'',
-            SDT: '',
-            HoTen: '',
-            GhiChu: '',
-            PhiVanChuyen: 0,
-            MaKH: ''
-          };
+      this.Api_NPH.put(
+        `/api/HoaDonBan/?maHoaDonBan=${this.list_NPH.MaHDB}`,
+        this.list_NPH
+      ).subscribe((data: any) => {
+        this.list_NPH = {
+          MaHDB: null,
+          NgayDat: '',
+          ThanhTien: 0,
+          DiaChi: '',
+          SDT: '',
+          HoTen: '',
+          GhiChu: '',
+          PhiVanChuyen: 0,
+          TrangThai: '',
+          MaKH: '',
+          IDNV: '',
+        };
 
-          this.showModal();
-        });
+        this.showModal();
+      });
     }
   }
 
+  check = true;
   deleteproduct(id: any) {
-    this.Api_NPH.delete('api/HoaDonBan/' + id).subscribe((res) => {
-      this.showModal();
-    });
+    if (this.check === true) {
+      this.Api_NPH.delete('api/CTHDB/delete/' + id).subscribe((res) => {
+      });
+      if (this.check === true) {
+        this.Api_NPH.delete('api/HoaDonBan/' + id).subscribe((res) => {
+          // alert('đã xóa hóa đơn thành không');
+          this.showModal();
+        });
+      }
+    }
   }
+
   Search() {
     if (this.list_NPH.MaKH == '') {
       this.ngOnInit();
@@ -165,8 +183,11 @@ export class HoadonbanComponent
       });
     }
   }
+
+  view(MaHDB: any) {
+    this.Api_NPH.get('/api/CTHDB/mahdb?mahdb=' + MaHDB).subscribe((res) => {
+      this.list_item1 = res;
+      console.log('ss', this.list_item1);
+    });
+  }
 }
-
-
-
-

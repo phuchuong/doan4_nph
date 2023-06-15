@@ -1,7 +1,5 @@
 
 
-
-
 import { ApiService } from './../../../core/services/api.service';
 import {
   AfterViewInit,
@@ -15,23 +13,20 @@ import { BaseComponent } from 'src/app/core/common/base-component';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 
-// data={}
-
 @Component({
-  selector: 'app-chitiethdb',
-  templateUrl: './chitiethdb.component.html',
-  styleUrls: ['./chitiethdb.component.scss']
+  selector: 'app-nhanvien',
+  templateUrl: './nhanvien.component.html',
+  styleUrls: ['./nhanvien.component.scss']
 })
-export class ChitiethdbComponent
-  extends BaseComponent
-  implements OnInit, AfterViewInit
-{
+export class NhanvienComponent  extends BaseComponent  implements OnInit, AfterViewInit {
+
   list_NPH= {
-    MaCTHDB: null,
-    MaDT: '',
-    ThanhTien: 0,
-    SoLuong:'',
-    MaHDB: '',
+    IDNV :null,
+    TenNV : '',
+    ChucVu :'',
+    SDT :'',
+    DiaChi :'',
+    Email :'',
 
   };
 
@@ -49,7 +44,7 @@ export class ChitiethdbComponent
   }
 
   showModal() {
-    this.Api_NPH.get('/api/CTHDB').subscribe((res) => {
+    this.Api_NPH.get('/api/NhanVien').subscribe((res) => {
       this.list_item = res;
 
       console.log(this.list_item);
@@ -75,81 +70,82 @@ export class ChitiethdbComponent
     this.loadScripts('assets/js/hide_menu.js', 'assets/js/slide_show.js');
   }
 
+  deleteproduct(id: any) {
+    this.Api_NPH.delete('api/NhanVien/' + id).subscribe((res) => {
+      this.showModal();
+    });
+  }
 
   creat() {
-    this.formHeader = 'Thêm CTHDB';
+    this.formHeader = 'Thêm nhân viên ';
     this.list_NPH = {
-      MaCTHDB: null,
-      MaDT: '',
-      ThanhTien: 0,
-      SoLuong:'',
-      MaHDB: '',
+      IDNV :null,
+      TenNV : '',
+      ChucVu :'',
+      SDT :'',
+      DiaChi :'',
+      Email :'',
     };
   }
   editproduct(a: any) {
-    this.formHeader = 'Sửa CTHDB';
+    this.formHeader = 'Sửa nhân viên';
 
-    this.list_NPH.MaCTHDB = a.MaCTHDB;
-    this.list_NPH.MaDT = a.MaDT;
-    this.list_NPH.ThanhTien = a.ThanhTien;
-    this.list_NPH.SoLuong = a.SoLuong;
-    this.list_NPH.MaHDB = a.MaHDB;
-
+    this.list_NPH.IDNV = a.IDNV;
+    this.list_NPH.TenNV = a.TenNV;
+    this.list_NPH.ChucVu = a.ChucVu;
+    this.list_NPH.SDT = a.SDT;
+    this.list_NPH.DiaChi = a.DiaChi;
+    this.list_NPH.Email = a.Email;
 
   }
 
 
   save(nut: any) {
-    if (nut == 'Thêm CTHDB') {
-      this.Api_NPH.post('/api/CTHDB', this.list_NPH).subscribe((data: any) => {
+    if (nut == 'Thêm nhân viên') {
+      this.Api_NPH.post('/api/NhanVien', this.list_NPH).subscribe((data: any) => {
         this.list_NPH = {
-          MaCTHDB: null,
-          MaDT: '',
-          ThanhTien: 0,
-          SoLuong:'',
-          MaHDB: '',
+          IDNV :null,
+          TenNV : '',
+          ChucVu :'',
+          SDT :'',
+          DiaChi :'',
+          Email :'',
+
         };
         this.showModal();
       });
     } else {
       //sửa sản phẩm
       console.log(this.list_NPH);
-      this.Api_NPH.put('/api/CTHDB', this.list_NPH);
+      this.Api_NPH.put('/api/NhanVien', this.list_NPH);
 
       this.Api_NPH
-        .put(`/api/CTHDB/?macthdb=${this.list_NPH.MaHDB}`, this.list_NPH)
+        .put(`/api/NhanVien/?manhanvien=${this.list_NPH.IDNV}`, this.list_NPH)
         .subscribe((data: any) => {
           this.list_NPH = {
-            MaCTHDB: null,
-            MaDT: '',
-            ThanhTien: 0,
-            SoLuong:'',
-            MaHDB: '',
+            IDNV :null,
+            TenNV : '',
+            ChucVu :'',
+            SDT :'',
+            DiaChi :'',
+            Email :'',
+
           };
 
           this.showModal();
         });
     }
   }
-
-  deleteproduct(id: any) {
-    this.Api_NPH.delete('api/CTHDB/' + id).subscribe((res) => {
-      this.showModal();
-    });
-  }
   Search() {
-    if (this.list_NPH.MaHDB == '') {
+    if (this.list_NPH.TenNV == '') {
       this.ngOnInit();
     } else {
       this.list_item = this.list_item.filter((res: any) => {
-        return res.MaHDB.toLocaleLowerCase().match(
-          this.list_NPH.MaHDB.toLocaleLowerCase()
+        return res.TenNV.toLocaleLowerCase().match(
+          this.list_NPH.TenNV.toLocaleLowerCase()
         );
       });
     }
   }
+
 }
-
-
-
-

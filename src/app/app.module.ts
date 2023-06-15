@@ -24,6 +24,13 @@ import { ApiService } from './core/services/api.service';
 import { FormsModule } from '@angular/forms';
 import { AdminComponent } from './modules/homes/admin/admin.component';
 import { TrangthaiComponent } from './modules/homes/trangthai/trangthai.component';
+import { NhacungcapComponent } from './modules/homes/nhacungcap/nhacungcap.component';
+import { HoadonnhapComponent } from './modules/homes/hoadonnhap/hoadonnhap.component';
+import { NhanvienComponent } from './modules/homes/nhanvien/nhanvien.component';
+import { ThongkeComponent } from './modules/homes/thongke/thongke.component';
+import { ThongbaoComponent } from './modules/homes/thongbao/thongbao.component';
+import { DangnhapComponent } from './modules/homes/dangnhap/dangnhap.component';
+import { TintucComponent } from './modules/homes/tintuc/tintuc.component';
 
 @NgModule({
   declarations: [
@@ -44,12 +51,21 @@ import { TrangthaiComponent } from './modules/homes/trangthai/trangthai.componen
      AdminComponent,
      TrangthaiComponent,
 
+     NhacungcapComponent,
+     HoadonnhapComponent,
+     NhanvienComponent,
+     ThongkeComponent,
+     ThongbaoComponent,
+     DangnhapComponent,
+     TintucComponent,
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    
     Ng2SearchPipeModule,
     NgxPaginationModule
   ],

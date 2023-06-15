@@ -15,11 +15,10 @@ Chi tiết hóa đơn bán
                   placeholder="Nhập từ bạn cần tìm?" aria-describedby="button-addon8" class="form-control"
                   [(ngModel)]="list_NPH.MaHDB" (ngModelChange)="Search()">
               </label>
-
             </div>
           </div>
           <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal"
-            style="margin-bottom:15px" (click)="creat()">CREAT </button>
+            style="margin-bottom:15px" (click)="creat()">THÊM </button>
 
         </div>
       </div>
@@ -55,16 +54,16 @@ Chi tiết hóa đơn bán
                     {{i}}
                   </th>
                   <td>{{list.MaCTHDB}}</td>
-                  <td>{{list.MaSP}}</td>
+                  <td>{{list.MaDT}}</td>
                   <td>{{list.SoLuong}} chiếc</td>
                   <td>{{list.ThanhTien | number}} vnđ</td>
                   <td>{{list.MaHDB}}</td>
 
 
                   <td><button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                      style="" (click)="editproduct(list)"> EDIT</button></td>
-                  <td><button type="button" class="btn btn-info" style=""
-                      (click)="deleteproduct(list.MaCTHDB)">DELETE</button></td>
+                      style="" (click)="editproduct(list)"> SỬA</button></td>
+                  <td><button type="button" class="btn btn-danger" style=""
+                      (click)="deleteproduct(list.MaCTHDB)">XÓA</button></td>
 
                 </tr>
 
@@ -94,7 +93,7 @@ Chi tiết hóa đơn bán
               </div>
               <div class="form-group">
                 <label for="recipient-name" class="col-form-label">Mã SP:</label>
-                <input type="text" class="form-control" [(ngModel)]="list_NPH.MaSP" name="MaSP">
+                <input type="text" class="form-control" [(ngModel)]="list_NPH.MaDT" name="MaDT">
               </div>
 
               <div class="form-group">

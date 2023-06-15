@@ -7,15 +7,14 @@ Hóa đơn bán
         <div class="page-title-box">
 
 
-          <h4 class="page-title">Hóa Đơn Bán</h4>
+          <h4 class="page-title">Hóa Đơn Nhập</h4>
           <div class="col-sm-6">
             <div id="example1_filter" class="dataTables_filter">
               <label style="display: flex;">
-                <h4 style="padding-right: 10px;">Search: </h4><input type="text" name="MaSP" type="search"
+                <h4 style="padding-right: 10px;">Search: </h4><input type="text" name="MaNCC" type="search"
                   placeholder="Nhập từ bạn cần tìm?" aria-describedby="button-addon8" class="form-control"
-                  [(ngModel)]="list_NPH.MaKH" (ngModelChange)="Search()">
+                  [(ngModel)]="list_NPH.MaNCC" (ngModelChange)="Search()">
               </label>
-
             </div>
           </div>
           <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal"
@@ -25,7 +24,7 @@ Hóa đơn bán
     </div>
 
     <div class="row">
-      <div class="col-13">
+      <div class="col-12">
         <div class="card-box">
           <!-- Start Content-->
           <div class="container-fluid">
@@ -37,21 +36,10 @@ Hóa đơn bán
               <thead>
                 <tr>
                   <th scope="col">STT</th>
-                  <th scope="col">Mã hoá đơn bán</th>
-                  <th scope="col">Ngày đặt</th>
-                  <th scope="col">Thành tiền</th>
-                  <th scope="col">Địa chỉ người gửi</th>
-                  <th scope="col">SĐT người gửi</th>
-                  <th scope="col">Họ tên người gửi</th>
-                  <th scope="col">Ghi chú</th>
-                  <th scope="col">Phí Vận Chuyển</th>
-                  <th scope="col">Trạng thái</th>
-                  <th scope="col">Mã Khach hàng</th>
-                  <th scope="col"></th>
-                  <th scope="col"></th>
-                  <th scope="col"></th>
-
-                  <!-- <th scope="col">Chức năng</th> -->
+                  <th scope="col">Mã hóa đơn nhập</th>
+                  <th scope="col">Mã nhà cung cấp</th>
+                  <th scope="col">Ngày Nhập</th>
+                  <th scope="col">Tổng tiền</th>
 
 
                 </tr>
@@ -62,25 +50,19 @@ Hóa đơn bán
                   <th scope="row">
                     {{i}}
                   </th>
-                  <td>{{list.MaHDB}}</td>
-                  <td>{{list.NgayDat}}</td>
-                  <td>{{list.ThanhTien}}</td>
-                  <td>{{list.DiaChi}}</td>
-                  <td>{{list.SDT}}</td>
-                  <td>{{list.HoTen}}</td>
-                  <td>{{list.GhiChu}}</td>
-                  <td>{{list.PhiVanChuyen}}</td>
-                  <td>{{list.TrangThai}}</td>
-                  <td>{{list.MaKH}}</td>
+                  <td>{{list.MaHDN}}</td>
+                  <td>{{list.MaNCC}}</td>
+                  <td>{{list.NgayNhap}}</td>
+                  <td>{{list.TongTien}}</td>
 
                   <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal"
-                    (click)="view(list.MaHDB)">XEM</button></td>
+                      (click)="view(list.MaHDN)">XEM</button></td>
 
                   <td><button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                      style="" (click)="editproduct(list)">SỬA</button></td>
+                      style="" (click)="editproduct(list)"> SỬA</button></td>
 
-                  <td><button type="button" class="btn btn-danger"  style=""
-                      (click)="deleteproduct(list.MaHDB)">XÓA</button></td>
+                  <td><button type="button" class="btn btn-danger" style=""
+                      (click)="deleteproduct(list.MaHDN)">XÓA</button></td>
 
 
                 </tr>
@@ -106,45 +88,22 @@ Hóa đơn bán
           <div class="modal-body">
             <form>
               <div class="form-group">
-                <label for="recipient-name" class="col-form-label">Mã hóa đơn bán:</label>
-                <input type="text" class="form-control" [(ngModel)]="list_NPH.MaHDB" name="MaHDB">
+                <label for="recipient-name" class="col-form-label">Mã hóa hóa đơn nhập:</label>
+                <input type="text" class="form-control" [(ngModel)]="list_NPH.MaHDN" name="MaHDN">
               </div>
               <div class="form-group">
-                <label for="recipient-name" class="col-form-label">Ngày đặt:</label>
-                <input type="text" class="form-control" [(ngModel)]="list_NPH.NgayDat" name="NgayDat">
+                <label for="recipient-name" class="col-form-label">Mã NCC:</label>
+                <input type="text" class="form-control" [(ngModel)]="list_NPH.MaNCC" name="MaNCC">
               </div>
               <div class="form-group">
-                <label for="recipient-name" class="col-form-label">Thành tiền:</label>
-                <input type="text" class="form-control" [(ngModel)]="list_NPH.ThanhTien" name="ThanhTien">
+                <label for="recipient-name" class="col-form-label">Ngày nhập:</label>
+                <input type="text" class="form-control" [(ngModel)]="list_NPH.NgayNhap" name="NgayNhap">
               </div>
               <div class="form-group">
-                <label for="recipient-name" class="col-form-label">Địa chỉ:</label>
-                <input type="text" class="form-control" [(ngModel)]="list_NPH.DiaChi" name="DiaChi">
+                <label for="recipient-name" class="col-form-label">Tổng tiền:</label>
+                <input type="text" class="form-control" [(ngModel)]="list_NPH.TongTien" name="TongTien">
               </div>
-              <div class="form-group">
-                <label for="recipient-name" class="col-form-label">SĐT:</label>
-                <input type="text" class="form-control" [(ngModel)]="list_NPH.SDT" name="SDT">
-              </div>
-              <div class="form-group">
-                <label for="recipient-name" class="col-form-label">Họ Tên:</label>
-                <input type="text" class="form-control" [(ngModel)]="list_NPH.HoTen" name="HoTen">
-              </div>
-              <div class="form-group">
-                <label for="recipient-name" class="col-form-label">Ghi chú:</label>
-                <input type="text" class="form-control" [(ngModel)]="list_NPH.GhiChu" name="GhiChu">
-              </div>
-              <div class="form-group">
-                <label for="recipient-name" class="col-form-label">Phí Vận Chuyển:</label>
-                <input type="text" class="form-control" [(ngModel)]="list_NPH.PhiVanChuyen" name="PhiVanChuyen">
-              </div>
-              <div class="form-group">
-                <label for="recipient-name" class="col-form-label">Phí Vận Chuyển:</label>
-                <input type="text" class="form-control" [(ngModel)]="list_NPH.TrangThai" name="TrangThai">
-              </div>
-              <div class="form-group">
-                <label for="recipient-name" class="col-form-label">Mã Khách Hàng:</label>
-                <input type="text" class="form-control" [(ngModel)]="list_NPH.MaKH" name="MaKH">
-              </div>
+
 
             </form>
           </div>
@@ -201,7 +160,7 @@ Hóa đơn bán
                     <th scope="col">Mã sản phẩm</th>
                     <th scope="col">Thành tiền</th>
                     <th scope="col">Số lương</th>
-                    <th scope="col">Mã hóa đơn bán</th>
+
 
 
                   </tr>
@@ -212,18 +171,11 @@ Hóa đơn bán
                     <th scope="row">
                       {{i}}
                     </th>
-                    <td>{{list1.MaCTHDB}}</td>
+                    <td>{{list1.MaCTHDN}}</td>
+                    <td>{{list1.MaHDN}}</td>
                     <td>{{list1.MaDT}}</td>
-                    <td>{{list1.ThanhTien}}</td>
                     <td>{{list1.SoLuong}}</td>
-                    <td>{{list1.MaHDB}}</td>
-                    <!-- <td><button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                        style="" (click)="editproduct(list)"> EDIT</button></td>
-                    <td><button type="button" class="btn btn-info" style=""
-                        (click)="deleteproduct(list.MaHDB)">DELETE</button></td>
 
-                    <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal"
-                        (click)="view(list.MaHDB)">VIEW</button></td> -->
                   </tr>
                 </tbody>
               </table>
@@ -240,16 +192,5 @@ Hóa đơn bán
       </div>
     </div>
 
-    <!-- end mdal ci tiét -->
 
-    <!--
-    <script>
-
-      var myModal = document.getElementById('myModal')
-      var myInput = document.getElementById('myInput')
-
-      myModal.addEventListener('shown.bs.modal', function () {
-        myInput.focus()
-      })
-    </script> -->
   </div>
